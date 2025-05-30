@@ -20,3 +20,35 @@ Where in other programming languages the indentation in code is for readability 
 Python uses indentation to indicate a block of code.
 """
 
+##variabls
+# المتغيرات
+#ex4
+x = 5
+number=935478
+print(x)
+print(number)
+#ex5
+name="Hamza"
+name_student_1="mohamad"
+name_student_1="shereen"
+print(name)
+print(name_student_1)
+
+#ex6
+print(type(name))
+print(type(x))
+
+#ex7
+print(name,name_student_1)
+
+#ex8
+print(name,type(name))
+
+
+#ex9
+print("this is name of :",name,"|| get the type of the variable name: ",type(name))
+
+
+
+
+
