@@ -1,54 +1,110 @@
-
 #lesson2
 
 
 #ex1
-print("hello world")
-print("lesson 2")
+##print(hello world)   error 
+
 
 #ex2
-print("welcome to course python")
+hello="welcom to python"
+print(hello)   
 
 
-#ex3
-# this new comment
-#print("this is new comment")
+#ex3 get type of variable
+hello="welcom to python"
+print(type(hello)) 
 
-""" 
-Indentation refers to the spaces at the beginning of a code line.
-Where in other programming languages the indentation in code is for readability only, the indentation in Python is very important.
-Python uses indentation to indicate a block of code.
-"""
-
-##variabls
-# المتغيرات
 #ex4
-x = 5
-number=935478
-print(x)
-print(number)
-#ex5
-name="Hamza"
-name_student_1="mohamad"
-name_student_1="shereen"
-print(name)
-print(name_student_1)
+#casting
+# التحويل القسري
 
-#ex6
-print(type(name))
+num=str(3)
+print(num)
+print("num variable is :",num,"type of num:",type(num))
+
+
+num1=3
+print(num1)
+print("num1 variable is :",num1,"type of num1:",type(num1))
+
+
+num2=int(3)
+print(num2)
+print("num2 variable is :",num2,"type of num2:",type(num2))
+
+print("num2 variable is :")
+print(num2)
+print("type of num2:")
+print(type(num2))
+
+
+
+##float
+x=2.5
+print(x)
 print(type(x))
 
-#ex7
-print(name,name_student_1)
 
-#ex8
-print(name,type(name))
-
-
-#ex9
-print("this is name of :",name,"|| get the type of the variable name: ",type(name))
+num3=float(3)
+print(num3)
+print("num3 variable is :",num3,"type of num3:",type(num3))
 
 
+
+##ex4
+name="ilays"
+name2='ilays'
+print(name, type(name))
+print(name2, type(name2))
+
+##مثال 5
+#حساسية اللغة
+a=10
+A=20
+print(a)
+print(A)
+
+
+##6 name variabls
+mystud="shereen"
+my_stud="shereen2"
+_my_stud="shereen3"
+myStud="shereen4"
+MYSTUD="shereen"
+myStud2="shereen4"
+
+
+#7 ERORR NAMES
+## 2MYSTUD="MOHAMMAD"
+##my-stud="mohammadf"
+##print(my-stud)
+
+##my stud="13246"
+## ja=5
+##if=10
+
+##8
+myStudNamaa="adel"
+MyStudNamaa="adel"
+my_stud_namaa="adel"
+
+##9
+
+name,age,gender="hamaza","22","male"
+print(name,age,gender)
+
+##10
+##error
+"""
+name,age,gender2="hamaza","22"
+print(name,age,gender2)
+"""
+##11
+name1,name2,name3="apple","apple","apple"
+print(name1,name2,name3)
+
+name1=name2=name3="apple"
+print(name1,name2,name3)
 
 
 
