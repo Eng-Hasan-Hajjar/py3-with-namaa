@@ -107,10 +107,108 @@ input("\nPress Enter to exit...")                                               
 X1="DUAA"
 print("duaa\d" ) 
 
+##ex1
+##isalpha()
+text="123456789"
+result=text.isalpha()
+print("is",result)
+
+
+##ex2
+##isalpha()
+text="123456789"
+result=text.isalpha()
+if result:
+    print("the text is alpha")
+print("is",result)
+
+##ex3
+##isascii()
+text="123456789"
+result=text.isascii()
+if result:
+    print("the text is isascii")
+print("is",result)
+
+
+##ex4
+##isascii()
+text="😍"
+result=text.isascii()
+if result:
+    print("the text is isascii")
+print("is",result)
+
+
+##ex5
+##isspace()
+text="       "
+result=text.isspace()
+if result:
+    print("the text is isspace")
+print("is",result)
+
+
+##ex6
+##istitle()
+text="For example: escape fo python"
+result=text.istitle()
+if result:
+    print("the text is istitle")
+print("is",result)
+
+
+##ex7
+##istitle()
+text="For Example: Escape For Python"
+result=text.istitle()
+if result:
+    print("the text is istitle")
+print("is",result)
+
+##ex8
+##join()
+mytuple=("shereen","hamza","ilays")
+related="&".join(mytuple)
+print(related)
+
+
+##ex9
+##join()
+mylist=list(("wathq","lina","nasir"))
+mylist=["wathq","lina","nasir"]
+related="&".join(mylist)
+print(related)
+
+
+##ex10
+##join()
+
+mylist=["duaa","maram","asmaa"]
+seperator=" and "
+related=seperator.join(mylist)
+print(related)
+
+##ex11
+##strip()
+
+txt="    banana    "
+print(txt.strip())
 
 
 
+##ex12
+##lstrip()
 
+txt="     banana    "
+txt2=txt.lstrip()
+print("person eat ",txt2,"end ex" )
 
+##ex13
+##lstrip()
+
+txt="bnbnc....banana    "
+txt2=txt.lstrip("bnbnc")
+print("person eat ",txt2,"end ex" )
 
 
