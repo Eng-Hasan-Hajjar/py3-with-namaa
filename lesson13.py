@@ -159,6 +159,7 @@ print(microsoft_office)
 microsoft_office=["excel","word","Powerpoint","Access"]
 microsoft_office.sort(key=str.lower)
 print(microsoft_office)
+
 ##ex21
 microsoft_office=["excel","word","Powerpoint","Access"]
 microsoft_office.reverse()
