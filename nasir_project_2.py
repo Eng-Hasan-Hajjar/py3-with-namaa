@@ -10,27 +10,14 @@ def calculate_macros():
         if weight <= 0 or height <= 0 or age <= 0:
             messagebox.showerror("خطأ في الإدخال", "الرجاء إدخال قيم موجبة للطول والوزن والعمر.")
             return
-
         if bulk == "التضخيم":
             amr = (10 * weight) + (6.25 * height) - (5 * age) + 500
-
-        
         else:  
             amr = (10 * weight) + (6.25 * height) - (5 * age) - 400
-
-
-
-        
         bul = amr * 1.55
-
-        
         protein_need = weight * 1.8
-
-        
         fat_calories = bul * 0.25
         fat_needed = fat_calories / 9
-
-        
         protein_calories = protein_need * 4
         carbs_calories = bul - protein_calories - fat_calories
         carbs_need = carbs_calories / 4
@@ -99,7 +86,7 @@ bulk_menu.pack(pady=5)
 
 # زر الحساب
 calculate_button = tk.Button(root, text="احسب السعرات", command=calculate_macros,
-font=button_font, bg="#707070", fg="black",
+font=button_font, bg="#FF0000", fg="black",
 bd=0, padx=10, pady=5)
 calculate_button.pack(pady=20)
 
