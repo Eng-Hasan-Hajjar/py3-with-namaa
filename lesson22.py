@@ -138,4 +138,12 @@ print(sum(2,3))
 sub=lambda g,k,l:g - k - l
 print(sub(2,3,1))
 
+##ex16
+def fun_2(n):
+    return lambda x:x*n
 
+y=fun_2(3)
+print(y(4))
+
+##arrays
+##numpy
