@@ -66,16 +66,16 @@ my_dog.move()
 
 # Father class
 class Animal:
-    def _init_(self, name):
+    def __init__(self, name):
         self.name = name
     def speak(self):
         return "When the animal makes a sound"
 
 # Child class (inherits from Animal)
 class Dog(Animal):
-    def _init_(self, name, breed):
+    def __init__(self, name, breed):
         # Call parent constructor using super()
-        super()._init_(name)
+        super().__init__(name)
         self.breed = breed
      
 
@@ -85,8 +85,8 @@ class Dog(Animal):
 
 # Another child class
 class Cat(Animal):
-    def _init_(self, name, color):
-        super()._init_(name)
+    def __init__(self, name, color):
+        super().__init__(name)
         self.color = color
 
     def speak(self):
@@ -103,6 +103,46 @@ print(cat1.speak())   # Whiskers says Meow!
 
 
 
+##
+name="kamel"
+print(len(name))
+
+
+name=[1,2,3,6,7,456,456,4654,77]
+print(len(name))
+
+
+class Car:
+    def __init__(self,brand,model):
+        self.brand=brand
+        self.model=model
+
+    def move(self):
+        print("Drive!")
+
+class Boat:
+    def __init__(self,brand,model):
+        self.brand=brand
+        self.model=model
+
+    def move(self):
+        print("sail!")
+
+class Plane:
+    def __init__(self,brand,model):
+        self.brand=brand
+        self.model=model
+
+    def move(self):
+        print("fly!")
+
+car1=Car("bmw","2010")
+boat1=Boat("boatggg","2020")
+plane1=Plane("pool","2030")
+
+
+for x in (car1,boat1,plane1):
+    x.move()
 
 
 
@@ -111,8 +151,34 @@ print(cat1.speak())   # Whiskers says Meow!
 
 
 
+class Vehicle:
+    def __init__(self,brand,model):
+        self.brand=brand
+        self.model=model
+
+    def move(self):
+        print("Drive!")
+
+class Car(Vehicle):
+    pass
+
+class Boat(Vehicle):
+    def move(self):
+        print("sail!")
+
+class Plane(Vehicle):
+    def move(self):
+        print("fly!")
+
+car1=Car("bmw","2010")
+boat1=Boat("boatggg","2020")
+plane1=Plane("pool","2030")
 
 
+for x in (car1,boat1,plane1):
+    print(x.model)
+    print(x.brand)
+    x.move()
 
 
 
