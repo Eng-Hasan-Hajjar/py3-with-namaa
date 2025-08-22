@@ -37,13 +37,67 @@ print(e.salary)
 e.printfullname()
 
 
+class Animal:
+    def __init__(self,name):
+        self.name=name
+    def speak(self):
+        raise NotImplementedError("Subclass must implement adbstract method")    
+    def move(self):
+        print(f"{self.name} is moving")
+
+class Dog(Animal):
+    def __init__(self, name ,color):
+        super().__init__(name)
+        self.color=color
+    def speak(self):
+        print(f"{self.name} is speaking nnnnnnn")
+    
+    def fetch(self):
+        print(f"{self.name} is fetching ball")
 
 
+my_dog=Dog("ddd","red")
+
+my_dog.speak()
+
+my_dog.fetch()
+my_dog.move()
 
 
+# Father class
+class Animal:
+    def _init_(self, name):
+        self.name = name
+    def speak(self):
+        return "When the animal makes a sound"
 
+# Child class (inherits from Animal)
+class Dog(Animal):
+    def _init_(self, name, breed):
+        # Call parent constructor using super()
+        super()._init_(name)
+        self.breed = breed
+     
 
+    def speak(self):
+        return f"{self.name} says Woof!"
+        
 
+# Another child class
+class Cat(Animal):
+    def _init_(self, name, color):
+        super()._init_(name)
+        self.color = color
+
+    def speak(self):
+        return f"{self.name} says Meow!"
+
+# Using the classes
+dog1 = Dog("Buddy", "Golden")
+cat1 = Cat("Whiskers", "White")
+
+print(dog1.speak())   # Buddy says Woof!
+print(cat1.speak())   # Whiskers says Meow!
 
 
 
