@@ -150,3 +150,41 @@ print(kk)
 
 kk=math.pi
 print(kk)
+
+
+
+
+####try except
+##try
+##except
+##else
+##finally
+
+try:
+    print(xxr)
+except:
+    print("you dont have xxr variable")  
+
+
+xxr=120
+try:
+    print(xxr)
+except:
+    print("you dont have xxr variable")      
+else:
+    print("bravo")    
+finally:
+    print("bravooooooo")
+
+
+x=5
+if x <0:
+    raise Exception("soryyyyy")
+
+
+
+gg="jamal"
+if not type(gg) is int:
+    raise TypeError("must use int")
+
+
