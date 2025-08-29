@@ -187,4 +187,3 @@ gg="jamal"
 if not type(gg) is int:
     raise TypeError("must use int")
 
-
