@@ -10,12 +10,8 @@ class ImageGalleryApp:
         # تهيئة النافذة الرئيسية
         self.root = root
         self.root.title("معرض الصور المتقدم")
-        self.root.geometry('1000x800')
-        self.root.resizable(True, True)
+        self.root.state('zoomed')  # جعل النافذة تظهر بملء الشاشة عند التشغيل
         self.root.configure(bg='#2c3e50')
-        
-        # مركزية النافذة على الشاشة
-        self.center_window()
         
         # قائمة للصور
         self.images = []
@@ -39,15 +35,6 @@ class ImageGalleryApp:
         if self.images:
             self.show_image(0)
     
-    def center_window(self):
-        """توسيط النافذة على الشاشة"""
-        self.root.update_idletasks()
-        width = self.root.winfo_width()
-        height = self.root.winfo_height()
-        x = (self.root.winfo_screenwidth() // 2) - (width // 2)
-        y = (self.root.winfo_screenheight() // 2) - (height // 2)
-        self.root.geometry('{}x{}+{}+{}'.format(width, height, x, y))
-    
     def load_existing_images(self):
         """تحميل الصور الموجودة في مجلد المعرض"""
         # الحصول على قائمة بجميع الملفات في المجلد
@@ -57,27 +44,48 @@ class ImageGalleryApp:
     
     def create_widgets(self):
         """إنشاء عناصر واجهة المستخدم"""
-        # إنشاء نمط للأزرار بألوان متناسقة
+        # إنشاء أنماط مختلفة للأزرار بألوان متنوعة
         style = ttk.Style()
-        style.configure('TButton', 
+        
+        # نمط للأزرار الأساسية (أزرق)
+        style.configure('Blue.TButton', 
                         font=('Arial', 10), 
                         background='#3498db', 
-                        foreground='white',
                         borderwidth=1,
                         focusthickness=3,
                         focuscolor='#3498db')
-        style.map('TButton', 
-                  background=[('active', '#2980b9')],
-                  foreground=[('active', 'white')])
+        style.map('Blue.TButton', 
+                  background=[('active', '#2980b9')])
         
-        style.configure('Tool.TButton', 
+        # نمط لأزرار الأدوات (أخضر)
+        style.configure('Green.TButton', 
                         font=('Arial', 9), 
                         padding=(5, 2),
-                        background='#3498db',
-                        foreground='white')
-        style.map('Tool.TButton', 
-                  background=[('active', '#2980b9')],
-                  foreground=[('active', 'white')])
+                        background='#27ae60')
+        style.map('Green.TButton', 
+                  background=[('active', '#219653')])
+        
+        # نمط لأزرار التنقل (أرجواني)
+        style.configure('Purple.TButton', 
+                        font=('Arial', 10),
+                        background='#9b59b6')
+        style.map('Purple.TButton', 
+                  background=[('active', '#8e44ad')])
+        
+        # نمط لأزرار التحرير (برتقالي)
+        style.configure('Orange.TButton', 
+                        font=('Arial', 9),
+                        background='#e67e22')
+        style.map('Orange.TButton', 
+                  background=[('active', '#d35400')])
+        
+        # نمط لأزرار التأثيرات (أحمر)
+        style.configure('Red.TButton', 
+                        font=('Arial', 9),
+                        background='#e74c3c')
+        style.map('Red.TButton', 
+                  background=[('active', '#c0392b')]
+                 )
         
         # إطار العنوان
         title_frame = tk.Frame(self.root, bg='#2c3e50')
@@ -108,11 +116,11 @@ class ImageGalleryApp:
         
         # استخدام رموز Unicode للأسهم
         self.prev_btn = ttk.Button(nav_frame, text="◀ السابق", command=self.prev_image, 
-                                  state=tk.DISABLED, style='Tool.TButton')
+                                  state=tk.DISABLED, style='Purple.TButton')
         self.prev_btn.pack(side=tk.LEFT, padx=5)
         
         self.next_btn = ttk.Button(nav_frame, text="التالي ▶", command=self.next_image, 
-                                  state=tk.DISABLED, style='Tool.TButton')
+                                  state=tk.DISABLED, style='Purple.TButton')
         self.next_btn.pack(side=tk.LEFT, padx=5)
         
         # أزرار الأدوات
@@ -120,22 +128,22 @@ class ImageGalleryApp:
         tool_btn_frame.pack(side=tk.RIGHT, padx=10)
         
         # زر تحميل صورة جديدة
-        self.load_btn = ttk.Button(tool_btn_frame, text="📁 تحميل صورة", command=self.load_image, style='Tool.TButton')
+        self.load_btn = ttk.Button(tool_btn_frame, text="📁 تحميل صورة", command=self.load_image, style='Green.TButton')
         self.load_btn.pack(side=tk.LEFT, padx=5)
         
         # زر حذف الصورة الحالية
         self.delete_btn = ttk.Button(tool_btn_frame, text="🗑️ حذف", command=self.delete_image, 
-                                    state=tk.DISABLED, style='Tool.TButton')
+                                    state=tk.DISABLED, style='Red.TButton')
         self.delete_btn.pack(side=tk.LEFT, padx=5)
         
         # زر عرض الصورة بكامل الحجم
         self.fullscreen_btn = ttk.Button(tool_btn_frame, text="🔍 عرض كامل", command=self.view_fullscreen, 
-                                        state=tk.DISABLED, style='Tool.TButton')
+                                        state=tk.DISABLED, style='Blue.TButton')
         self.fullscreen_btn.pack(side=tk.LEFT, padx=5)
         
         # زر تحرير الصورة
         self.edit_btn = ttk.Button(tool_btn_frame, text="✏️ تحرير", command=self.toggle_edit_tools, 
-                                  state=tk.DISABLED, style='Tool.TButton')
+                                  state=tk.DISABLED, style='Orange.TButton')
         self.edit_btn.pack(side=tk.LEFT, padx=5)
         
         # إطار معلومات الصورة
@@ -160,7 +168,7 @@ class ImageGalleryApp:
     
     def setup_edit_tools(self):
         """إعداد أدوات تحرير الصورة"""
-        # إطار أدوات التحرير
+        # إطار أدوت التحرير
         self.edit_tools_frame = tk.Frame(self.tool_frame, bg='#2c3e50')
         self.edit_tools_frame.pack(fill=tk.X, pady=5)
         
@@ -200,20 +208,37 @@ class ImageGalleryApp:
                                   troughcolor='#34495e', highlightbackground='#2c3e50')
         sharpness_scale.pack(side=tk.LEFT, padx=5)
         
+        # إضافة أدوات لتغيير حجم الصورة (الطول والعرض)
+        resize_frame = tk.Frame(self.tool_frame, bg='#2c3e50')
+        resize_frame.pack(fill=tk.X, pady=5)
+        
+        tk.Label(resize_frame, text="العرض الجديد:", font=("Arial", 10), fg="white", bg='#2c3e50').pack(side=tk.LEFT, padx=5)
+        self.new_width_entry = tk.Entry(resize_frame, width=10)
+        self.new_width_entry.pack(side=tk.LEFT, padx=5)
+        
+        tk.Label(resize_frame, text="الطول الجديد:", font=("Arial", 10), fg="white", bg='#2c3e50').pack(side=tk.LEFT, padx=5)
+        self.new_height_entry = tk.Entry(resize_frame, width=10)
+        self.new_height_entry.pack(side=tk.LEFT, padx=5)
+        
+        self.keep_aspect_var = tk.BooleanVar(value=True)
+        tk.Checkbutton(resize_frame, text="الحفاظ على النسبة", variable=self.keep_aspect_var, fg="white", bg='#2c3e50', selectcolor='#34495e').pack(side=tk.LEFT, padx=5)
+        
+        ttk.Button(resize_frame, text="تطبيق الحجم", command=self.apply_resize, style='Green.TButton').pack(side=tk.LEFT, padx=5)
+        
         # أزرار تأثيرات خاصة
         effects_frame = tk.Frame(self.tool_frame, bg='#2c3e50')
         effects_frame.pack(fill=tk.X, pady=5)
         
         ttk.Button(effects_frame, text="تأثير أبيض وأسود", 
-                  command=self.apply_grayscale, style='Tool.TButton').pack(side=tk.LEFT, padx=5)
+                  command=self.apply_grayscale, style='Green.TButton').pack(side=tk.LEFT, padx=5)
         ttk.Button(effects_frame, text="تدوير 90°", 
-                  command=self.rotate_image, style='Tool.TButton').pack(side=tk.LEFT, padx=5)
+                  command=self.rotate_image, style='Blue.TButton').pack(side=tk.LEFT, padx=5)
         ttk.Button(effects_frame, text="عكس الصورة", 
-                  command=self.flip_image, style='Tool.TButton').pack(side=tk.LEFT, padx=5)
+                  command=self.flip_image, style='Purple.TButton').pack(side=tk.LEFT, padx=5)
         ttk.Button(effects_frame, text="استعادة الأصل", 
-                  command=self.reset_edits, style='Tool.TButton').pack(side=tk.LEFT, padx=5)
+                  command=self.reset_edits, style='Orange.TButton').pack(side=tk.LEFT, padx=5)
         ttk.Button(effects_frame, text="حفظ التعديلات", 
-                  command=self.save_edits, style='Tool.TButton').pack(side=tk.LEFT, padx=5)
+                  command=self.save_edits, style='Red.TButton').pack(side=tk.LEFT, padx=5)
     
     def load_image(self):
         """تحميل صورة جديدة من خلال نافذة اختيار الملف"""
@@ -274,16 +299,33 @@ class ImageGalleryApp:
                 messagebox.showerror("خطأ", f"لا يمكن عرض الصورة: {str(e)}")
     
     def display_image(self):
-        """عرض الصورة الحالية مع التعديلات والتكبير/التصغير"""
+        """عرض الصورة الحالية مع التعديلات والتكبير/التصغير مع تحديد الحجم الأقصى"""
         if self.edited_image:
-            # تطبيق مستوى التكبير/التصغير
-            width, height = self.edited_image.size
-            new_size = (int(width * self.zoom_level), int(height * self.zoom_level))
+            # الحصول على حجم الشاشة
+            screen_width = self.root.winfo_screenwidth()
+            screen_height = self.root.winfo_screenheight()
             
-            if new_size != self.edited_image.size:
-                display_image = self.edited_image.resize(new_size, Image.LANCZOS)
-            else:
-                display_image = self.edited_image
+            # حساب الحجم الأقصى المسموح (75% من الشاشة)
+            max_width = int(screen_width * 0.75)
+            max_height = int(screen_height * 0.75)
+            
+            # حجم الصورة الحالي
+            width, height = self.edited_image.size
+            
+            # حساب نسبة التعديل لتناسب الحجم الأقصى إذا لزم الأمر
+            ratio = min(max_width / width, max_height / height, 1.0)  # لا تكبر إذا كانت الصورة أصغر
+            
+            # تطبيق مستوى التكبير/التصغير مع النسبة
+            adjusted_width = int(width * ratio * self.zoom_level)
+            adjusted_height = int(height * ratio * self.zoom_level)
+            
+            # التحقق من عدم تجاوز الحجم الأقصى بعد التكبير
+            if adjusted_width > max_width or adjusted_height > max_height:
+                zoom_ratio = min(max_width / adjusted_width, max_height / adjusted_height)
+                adjusted_width = int(adjusted_width * zoom_ratio)
+                adjusted_height = int(adjusted_height * zoom_ratio)
+            
+            display_image = self.edited_image.resize((adjusted_width, adjusted_height), Image.LANCZOS)
             
             # تحويل الصورة إلى تنسيق متوافق مع Tkinter
             photo = ImageTk.PhotoImage(display_image)
@@ -353,7 +395,7 @@ class ImageGalleryApp:
         # إنشاء نافذة جديدة
         fullscreen_window = tk.Toplevel(self.root)
         fullscreen_window.title("عرض الصورة بكامل الحجم")
-        fullscreen_window.geometry('800x600')
+        fullscreen_window.attributes('-fullscreen', True)
         fullscreen_window.configure(bg='#2c3e50')
         
         # جعل النافذة تظهر في المقدمة
@@ -364,12 +406,14 @@ class ImageGalleryApp:
         screen_width = fullscreen_window.winfo_screenwidth()
         screen_height = fullscreen_window.winfo_screenheight()
         
-        # عرض الصورة بحجم كامل مع الحفاظ على النسبة
+        # عرض الصورة بحجم كامل مع الحفاظ على النسبة، لكن لا يتجاوز 75%
         image = Image.open(self.images[self.current_image_index])
         width, height = image.size
         
-        # حساب الحجم المناسب للعرض
-        ratio = min(screen_width/width, screen_height/height) * 0.8
+        # حساب الحجم المناسب للعرض (أقصى 75%)
+        max_width = int(screen_width * 0.75)
+        max_height = int(screen_height * 0.75)
+        ratio = min(max_width / width, max_height / height, 1.0)
         new_size = (int(width * ratio), int(height * ratio))
         display_image = image.resize(new_size, Image.LANCZOS)
         
@@ -386,7 +430,7 @@ class ImageGalleryApp:
         button_frame.pack(pady=10)
         
         ttk.Button(button_frame, text="إغلاق", 
-                  command=fullscreen_window.destroy, style='Tool.TButton').pack()
+                  command=fullscreen_window.destroy, style='Blue.TButton').pack()
     
     def toggle_edit_tools(self):
         """تبديل إظهار/إخفاء أدوات التحرير"""
@@ -435,6 +479,34 @@ class ImageGalleryApp:
         if self.edited_image:
             self.edited_image = ImageOps.mirror(self.edited_image)
             self.display_image()
+    
+    def apply_resize(self):
+        """تطبيق تغيير حجم الصورة بناءً على الإدخالات"""
+        if not self.edited_image:
+            return
+        
+        try:
+            new_width = int(self.new_width_entry.get())
+            new_height = int(self.new_height_entry.get())
+            
+            if new_width <= 0 or new_height <= 0:
+                raise ValueError("يجب أن تكون الأبعاد إيجابية")
+            
+            if self.keep_aspect_var.get():
+                # الحفاظ على النسبة
+                orig_width, orig_height = self.edited_image.size
+                ratio = min(new_width / orig_width, new_height / orig_height)
+                new_width = int(orig_width * ratio)
+                new_height = int(orig_height * ratio)
+            
+            self.edited_image = self.edited_image.resize((new_width, new_height), Image.LANCZOS)
+            self.display_image()
+            
+            # تنظيف الحقول بعد التطبيق
+            self.new_width_entry.delete(0, tk.END)
+            self.new_height_entry.delete(0, tk.END)
+        except ValueError as e:
+            messagebox.showerror("خطأ", f"قيم غير صالحة: {str(e)}")
     
     def reset_edits(self):
         """استعادة الصورة إلى حالتها الأصلية"""
